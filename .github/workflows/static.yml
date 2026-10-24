@@ -1,24 +1,8 @@
-name: Deploy HTML to S3
+      - name: Check AWS identity
+        run: aws sts get-caller-identity
 
-on: push
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code from repo
-        uses: actions/checkout@v4
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-
-      - name: Copy static code to S3
+      - name: Upload HTML to S3
         run: |
-          aws s3 sync ./ s3://jhca-gha-static-website-demo/ \
-            --exclude "*" \
-            --include "index.html"
+          ls -la
+          aws s3 cp index.html s3://jhca-gha-static-website-demo/index.html
+          aws s3 ls s3://jhca-gha-static-website-demo/
