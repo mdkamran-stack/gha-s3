@@ -11,6 +11,3 @@ jobs:
           aws-access-key-id: ${{ secret.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-          
-          
-          
